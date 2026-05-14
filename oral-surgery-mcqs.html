@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oral Surgery MCQs - 5th Stage</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .nav {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .nav h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .nav ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+        .nav ul li a {
+            display: block;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav ul li a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .subject-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .subject-section h2 {
+            color: #4a2c82;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        .question-block {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .question-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        .options {
+            list-style: none;
+        }
+        .options li {
+            margin-bottom: 8px;
+        }
+        .options li label {
+            display: block;
+            padding: 10px 15px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        .options li label:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+        .options li input[type="radio"] {
+            display: none;
+        }
+        .options li input[type="radio"]:checked + label {
+            border-color: #667eea;
+            background: #e8edff;
+            font-weight: 500;
+        }
+        .options li input[type="radio"]:checked + label.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+        .options li input[type="radio"]:checked + label.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .options li label.show-correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+            font-weight: 600;
+        }
+        .btn-check {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+        .result.correct {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        .score-bar {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .score-bar .score { color: #28a745; }
+        .score-bar .total { color: #333; }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .back-to-top:hover { transform: translateY(-3px); }
+        @media (max-width: 600px) {
+            .nav ul { grid-template-columns: 1fr; }
+            h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oral Surgery MCQs</h1>
+        <p class="subtitle">Branch & Stage: Dentistry - 5th Stage | Dr. Cube Dentistry</p>
+
+        <div class="score-bar">
+            <span class="total">Questions Answered: <span id="answered">0</span> / <span id="totalQ">0</span></span>
+            <span class="score">Correct: <span id="correctCount">0</span></span>
+        </div>
+
+        <div class="nav">
+            <h2>Subjects</h2>
+            <ul>
+                <li><a href="#sec1">Maxillofacial Trauma</a></li>
+                <li><a href="#sec2">Fractures Of The Mandible</a></li>
+                <li><a href="#sec3">Fractures Of The Middle Third</a></li>
+                <li><a href="#sec4">Dentoalveolar Injuries</a></li>
+                <li><a href="#sec5">Potentially Malignant Disorders</a></li>
+                <li><a href="#sec6">Vascular Anomalies</a></li>
+                <li><a href="#sec7">Implant Treatment Advanced Concepts</a></li>
+                <li><a href="#sec8">Orofacial Pain</a></li>
+                <li><a href="#sec9">Benign Cystic Lesions</a></li>
+                <li><a href="#sec10">Preprosthetic Surgery</a></li>
+                <li><a href="#sec11">Orthognathic Surgery</a></li>
+                <li><a href="#sec12">Laser and Cryosurgery</a></li>
+                <li><a href="#sec13">Odontogenic Diseases of Maxillary Sinus</a></li>
+                <li><a href="#sec14">Oral Cancer (Diagnosis)</a></li>
+                <li><a href="#sec15">Oral Cancer (Management)</a></li>
+                <li><a href="#sec16">Reconstructive Surgery</a></li>
+                <li><a href="#sec17">Odontogenic Tumors</a></li>
+                <li><a href="#sec18">Non-Odontogenic Tumors</a></li>
+                <li><a href="#sec19">Salivary Gland Diseases</a></li>
+                <li><a href="#sec20">TMJ Disorders</a></li>
+                <li><a href="#sec21">Cleft Lip and Palate</a></li>
+            </ul>
+        </div>
+
+        <!-- Questions will be inserted by JavaScript -->
+        <div id="quiz-content"></div>
+
+        <a href="#" class="back-to-top">&#8593;</a>
+    </div>
+
+<script>
+const quizData = [
+
+{
+    id: "sec1",
+    title: "Maxillofacial Trauma (Preliminary Management of Facial Fracture)",
+    questions: [
+        {
+            q: "1. Which of the following parameter reflect the degree of hypovolemia?",
+            options: ["A. Rapid capillary return", "B. Increase in body temperature", "C. Narrowing pulse pressure (diastolic minus systolic)", "D. Bradycardia", "E. None of the above"],
+            answer: 2
+        },
+        {
+            q: "2. In the assessment of breathing, all the following are true except:",
+            options: ["A. Ventilation requires adequate function of the lungs", "B. Tension pneumothorax is unsealed opening in the chest wall", "C. Flail chest occurs when three or more ribs fractured in at least two locations", "D. Occlusive dressing is the management of open pneumothorax", "E. Stridor occurs when there is lower airway obstruction"],
+            answer: 1
+        },
+        {
+            q: "3. Which of the following parameters reflects the degree of hypovolemia?",
+            options: ["A. Tachycardia, Hypertension, Widening pulse pressure, Tachypnea, Rapid capillary return, Increasing urinary output, Improving mental status", "B. Bradycardia, Hypertension, Widening pulse pressure, Bradypnea, Rapid capillary return, Increasing urinary output, Improving mental status", "C. Bradycardia, Hypotension, Widening pulse pressure, Bradypnea, Rapid capillary return, Increasing urinary output, Decreased confusion", "D. Tachycardia, Hypotension, Narrowing pulse pressure, Tachypnea, Delayed capillary return, Falling urinary output, Confusion", "E. Bradycardia, Hypotension, Narrowing pulse pressure, Bradypnea, Delayed capillary return, Falling urinary output, Deteriorating mental status"],
+            answer: 4
+        },
+        {
+            q: "4. When three or more adjacent ribs are fractured in two locations this will result in:",
+            options: ["A. Pneumothorax", "B. Flail chest", "C. Rupture of diaphragm", "D. Hemothorax", "E. Pleural effusion"],
+            answer: 1
+        },
+        {
+            q: "5. The most important factor controlling the patency of the airway in a patient with facial injuries is:",
+            options: ["A. Intact tongue", "B. Undisplaced fracture mandible", "C. Level of consciousness", "D. Bleeding", "E. Medical history"],
+            answer: 2
+        },
+        {
+            q: "6. In Glasgow coma scale, patient considered unable to protect airway when score:",
+            options: ["A. Less than 12", "B. More than 12", "C. Less than 8", "D. More than 8", "E. Less than 4"],
+            answer: 2
+        }
+    ]
+},
+{
+    id: "sec2",
+    title: "Fractures Of The Mandible",
+    questions: [
+        {
+            q: "1. The main indication for open management of a mandibular fracture is:",
+            options: ["A. Fracture of an edentulous mandible with severe displacement", "B. Grossly infected fractures", "C. Pediatric fractures", "D. Medically compromised patients", "E. Both A and B"],
+            answer: 0
+        },
+        {
+            q: "2. If the fracture heals abnormally or in a non-anatomic position it is referred to as:",
+            options: ["A. Non-union", "B. Delayed union", "C. Fracture site infection", "D. Malunion", "E. All of the above"],
+            answer: 3
+        },
+        {
+            q: "3. Which of the following is correct about mandibular fracture?",
+            options: ["A. A simple fracture extends to an external environment through skin or gingival ligament", "B. A compound fracture occurs when the broken bone is joined in multiple pieces", "C. A complex fracture is associated with vital structures damage", "D. Greenstick fracture is found exclusively in elderly patients", "E. Both B and C are correct"],
+            answer: 4
+        },
+        {
+            q: "4. A relative indication for a tooth removal from the fracture line is:",
+            options: ["A. Advanced periodontitis", "B. Presence of periapical infection", "C. Pulpitis", "D. A non-functional tooth that is likely to be removed", "E. None of the above"],
+            answer: 3
+        },
+        {
+            q: "5. Regarding mandibular fractures in children:",
+            options: ["A. Surgical management is the best to avoid growth consequences after completion", "B. When deciduous and temporary fractures are firmly fixated, splint fixation is the treatment of choice", "C. Continuous growth and teeth eruption will in most cases compensate for the ideal misalignment of the segments", "D. Titanium plates are preferred as internal fixation methods", "E. Absorbable plates are associated with growth disturbance"],
+            answer: 1
+        },
+        {
+            q: "6. One of the delayed post-surgical complications of internal fixation is:",
+            options: ["A. Nerve damage", "B. Plate exposure", "C. Occlusal change", "D. Bone damage", "E. Malunion"],
+            answer: 2
+        },
+        {
+            q: "7. In open reduction and internal fixation for mandibular fractures, the fixation device that is considered non-rigid fixation is:",
+            options: ["A. Transosseous wiring", "B. Mini-plates", "C. 3D titanium mini-plates", "D. Plates and bio-absorbable plates", "E. All of the above"],
+            answer: 0
+        },
+        {
+            q: "8. Concerning the closed treatment of mandibular fractures, one statement is correct:",
+            options: ["A. It is associated with direct fixation and immobilization", "B. It requires surgical exposure of the fracture site", "C. It is considered a temporary treatment", "D. Reduction can be performed by elastic traction", "E. Mandibulomaxillary fixation is always not required"],
+            answer: 3
+        },
+        {
+            q: "9. The linear fracture of dentate body of the mandible is considered as:",
+            options: ["A. Simple fracture", "B. Compound fracture", "C. Closed fracture", "D. Pathological fracture", "E. Comminuted fracture"],
+            answer: 1
+        },
+        {
+            q: "10. In vertically unfavorable mandibular fracture:",
+            options: ["A. Masseter muscle displace the two fragments of fracture", "B. Medial pterygoid muscle displace the two fragments of fracture", "C. Lateral pterygoid muscle displace the two fragments of fracture", "D. Masseter muscle approximate the two fragments of fracture", "E. Medial pterygoid muscle approximate the two fragments of fracture"],
+            answer: 1
+        },
+        {
+            q: "11. A fractured mandibular condyle is displaced forward and medially by the action of the following muscle:",
+            options: ["A. Temporalis", "B. Medial pterygoid", "C. Masseter", "D. Lateral pterygoid", "E. Styloglossus"],
+            answer: 3
+        },
+        {
+            q: "12. The pathognomonic sign of mandibular fracture is:",
+            options: ["A. Pain", "B. Edema", "C. Trismus", "D. Malocclusion", "E. Sublingual hematoma"],
+            answer: 4
+        },
+        {
+            q: "13. Closed treatment of mandibular fracture is indicated in all of the following cases except:",
+            options: ["A. Grossly infected fractures", "B. Pediatric fractures with mixed dentition phase", "C. Non-displaced favourable fractures", "D. Edentulous fractures", "E. Epileptic patient"],
+            answer: 4
+        },
+        {
+            q: "14. One of the following is not an absolute indication for ORIF of condylar fractures:",
+            options: ["A. Displacement of condyle into middle cranial fossa", "B. Impossibility of restoring occlusion with closed treatment", "C. Lateral extra-capsular displacement", "D. Unilateral fracture with dislocation, overlap or significant angulation of the condylar head", "E. Invasion by foreign body"],
+            answer: 3
+        }
+    ]
+},
+
+{
+    id: "sec3",
+    title: "Fractures Of The Middle Third",
+    questions: [
+        {
+            q: "1. In Gillies approach to reduce a zygomatic arch fracture, a Rowe's lever is passed:",
+            options: ["A. On the superficial surface of the temporal fascia", "B. Deep to the surface of the temporal fascia and deep to the zygomatic bone", "C. On the superficial surface of the temporal muscle and deep to the zygomatic bone", "D. Between the superficial and deep temporal fascia", "E. Both C and D"],
+            answer: 4
+        },
+        {
+            q: "2. Medical management for retrobulbar hemorrhage includes:",
+            options: ["A. Intravenous mannitol 10% (1gm/kg) and 500 mg acetazolamide and 3-4 mg/kg Dexamethasone", "B. Intravenous mannitol 20% (1mg/kg) and 500 mg acetazolamide and 3-4 mg/kg Dexamethasone", "C. Intravenous mannitol 20% (1gm/kg) and 500 mg acetazolamide and 3-4 mg/kg Dexamethasone", "D. Intravenous mannitol 10% (1mg/kg) and 500 gm acetazolamide and 3-4 mg/kg Dexamethasone", "E. None of the above"],
+            answer: 1
+        },
+        {
+            q: "3. Which of the following internal suspension wiring methods is NOT used to fixate a Le Fort II fracture?",
+            options: ["A. Pyriform fossa wiring", "B. Infraorbital rim suspension wiring", "C. Circumzygomatic wiring", "D. Supraorbital rim suspension wiring", "E. None of the above"],
+            answer: 3
+        },
+        {
+            q: "4. The cause of facial lengthening with the characteristic facial deformity in high Le Fort fractures is:",
+            options: ["A. Alveolar-dental fracture in the maxillary arch", "B. Nasal fracture combined with mandibular fractures", "C. The retrusion and sliding of the midfacial bones on an inclined skull base", "D. Le Fort I fracture with 'nose lowering'", "E. Low nasal and ethmoid fracture"],
+            answer: 2
+        },
+        {
+            q: "5. Nasal fractures:",
+            options: ["A. It is important to look for septal hematoma. It should be evacuated as soon as possible, as it may cause septal cartilage necrosis", "B. Plane I injury is limited to the nasal bone and does not involve the orbital rim", "C. An occipitomental radiograph is the examination of choice for plane I injury cases", "D. Plane I and II injury are treated by ORIF", "E. Surgical access for a plane III injury is through a nasal flap"],
+            answer: 1
+        },
+        {
+            q: "6. In the treatment of a Le Fort I fracture, mini-plates should be applied at the:",
+            options: ["A. Maxillary buttress", "B. Zygomatic buttress", "C. Nasomaxillary buttress", "D. Zygomatic-temporal buttress", "E. None of the above"],
+            answer: 1
+        },
+        {
+            q: "7. Le Fort II fracture:",
+            options: ["A. Involves the nasofrontal suture, nasal and lacrimal bones, infraorbital rim, mandible, and zygomatic arch", "B. Involves the nasofrontal suture, nasal and lacrimal bones, infraorbital rim", "C. Involves the nasofrontal suture, nasal and lacrimal bones, infraorbital rim, mandible, and pterygoid plates", "D. Involves the nasofrontal suture, nasal and lacrimal bones, infraorbital rim, maxilla, and zygomatic arch", "E. Involves the nasofrontal suture, nasal and lacrimal bones, infraorbital rim, maxilla, and pterygoid plates, ethmoid bone, and pterygoid plates"],
+            answer: 0
+        },
+        {
+            q: "8. In Gillies temporal approach for reduction of zygomatic arch fracture, Rowe elevator is placed between:",
+            options: ["A. Superficial fascia & temporal fascia", "B. Temporal bone & temporalis muscle", "C. Temporal fascia & temporalis muscle", "D. Skin & superficial fascia", "E. Skin & subcutaneous tissue"],
+            answer: 2
+        },
+        {
+            q: "9. The classical hanging drop appearance on occipitomental view is related to:",
+            options: ["A. Nasal bones fracture", "B. Maxillary fractures", "C. Zygomatic fractures", "D. Orbital floor fractures", "E. LeFort III fractures"],
+            answer: 3
+        },
+        {
+            q: "10. The best available diagnostic method of detection of CSF rhinorrhea is:",
+            options: ["A. Testing the discharge for B-2 transferrin", "B. Testing the discharge for glucose", "C. Salty metallic test if the patient in supine position", "D. Classical tramline pattern", "E. All of the above"],
+            answer: 0
+        },
+        {
+            q: "11. Which of the following is not true regarding Le Fort I?",
+            options: ["A. Anterior open bite is seen", "B. Also called Guerin fracture", "C. Mobility of midface at frontonasal suture", "D. Low level fracture of maxilla", "E. Involve anterolateral wall of maxillary sinus"],
+            answer: 2
+        },
+        {
+            q: "12. Walsham's forceps are used to:",
+            options: ["A. Remove teeth", "B. Reduce zygomatic complex fracture", "C. Clamp blood vessel", "D. Reduce nasal bone", "E. None of above"],
+            answer: 3
+        },
+        {
+            q: "13. Guerin sign is the:",
+            options: ["A. Presence of intraoral ecchymosis over the zygomaticomaxillary buttress", "B. Presence of 'cracked pot' percussion sound from upper teeth", "C. Presence of Palatal ecchymosis", "D. Presence of diplopia", "E. Presence of mobility in the upper teeth"],
+            answer: 2
+        },
+        {
+            q: "14. The Le Fort II fracture is also called:",
+            options: ["A. Guerin fracture", "B. Sub-zygomatic fracture", "C. Craniofacial disjunction fracture", "D. High level maxillary fracture", "E. None of above"],
+            answer: 1
+        }
+    ]
+},
+{
+    id: "sec4",
+    title: "Dentoalveolar Injuries",
+    questions: [
+        {
+            q: "1. After replanting an avulsed tooth, the involved teeth should be splinted with a:",
+            options: ["A. Semi-rigid splint for 7 to 10 days", "B. Rigid splint for 7 to 10 days", "C. Semi-rigid splint for 2 to 3 weeks", "D. Rigid splint for 2 to 3 weeks", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "2. An abrasion:",
+            options: ["A. Is a superficial type of facial wound", "B. Is usually caused by a sharp object", "C. The epidermis is separated from the dermis leaving a bloodless area", "D. Requires a vigorous debridement", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "3. The injury that involves the enamel and dentin with pulp exposure is called a:",
+            options: ["A. Uncomplicated crown fracture", "B. Complicated crown fracture", "C. Uncomplicated crown-root fracture", "D. Complicated crown-root fracture", "E. Complicated root fracture"],
+            answer: 1
+        },
+        {
+            q: "4. A 22-year-old male presents with a dental injury following a high-velocity impact from a blunt object. Which clinical finding is MOST expected?",
+            options: ["A. A complete crack of the enamel without loss of tooth substance", "B. A fracture confined to the enamel and dentin with pulp exposure", "C. Displacement of the tooth axially with comminution of the socket", "D. A fracture involving the enamel, dentin, and cementum without pulp exposure"],
+            answer: 1
+        },
+        {
+            q: "5. When evaluating a suspected crown infraction, what is the specific clinical protocol required to confirm the diagnosis?",
+            options: ["A. Directing a light beam parallel to the long axis of the tooth from the cervical margin", "B. Directing a light beam perpendicular to the long axis of the tooth from the incisal edge", "C. Tapping the tooth with a mouth mirror handle to elicit a metallic ring", "D. Performing an immediate pulp vitality test to determine the necessity of a composite restoration"],
+            answer: 1
+        },
+        {
+            q: "6. A patient presents with a tooth that is locked into the bone following trauma. What combination of clinical findings would a clinician expect?",
+            options: ["A. Marked reaction to percussion and abnormal axial loosening", "B. A dull sound upon percussion and displacement in a non-axial direction", "C. A hard metallic ring upon percussion and a sound indicative of being locked in bone", "D. Pain elicited with percussion and a shallow wound produced by a sharp object"],
+            answer: 2
+        }
+    ]
+},
+
+{
+    id: "sec5",
+    title: "Potentially Malignant Disorders Of Oral Mucosa",
+    questions: [
+        {
+            q: "1. Risk factors for malignant transformation of leukoplakia, one statement is correct:",
+            options: ["A. Leukoplakia that cannot be wiped off may be malignant", "B. The extent of leukoplakia is an irrelevant factor", "C. Smoking is a risk factor", "D. The presence of candida albicans decreases the risk of malignancy", "E. None of the above is correct"],
+            answer: 2
+        },
+        {
+            q: "2. The differential diagnosis for a white lesion in the oral cavity would include all of the above except:",
+            options: ["A. White sponge nevus", "B. Chemical injury", "C. Leukoplakia", "D. Atrophic oral lichen planus", "E. Skin graft"],
+            answer: 3
+        },
+        {
+            q: "3. In oral potentially malignant disorders, when the changes are mainly limited to the basal layer and parabasal layers, it is considered:",
+            options: ["A. Carcinoma in situ", "B. Moderate epithelial dysplasia", "C. Severe epithelial dysplasia", "D. Mild epithelial dysplasia", "E. None of the above is applicable"],
+            answer: 3
+        },
+        {
+            q: "4. The most common oral potentially malignant disorder is:",
+            options: ["A. Erythroplakia", "B. Leukoplakia", "C. Oral lichen planus", "D. Palatal changes associated with reverse smoking", "E. Oral submucous fibrosis"],
+            answer: 1
+        },
+        {
+            q: "5. _____ does not regress with habit cessation or removal of the causative agent, and treatment depends on the severity of the condition.",
+            options: ["A. Oral leukoplakia", "B. Actinic cheilitis (cheilosis)", "C. Palatal changes associated with reverse smoking", "D. Oral submucous fibrosis", "E. Palatal changes associated with reverse smoking"],
+            answer: 3
+        },
+        {
+            q: "6. Leukoplakia, located in which of the following sites, would be regarded as having the highest risk for malignant transformation?",
+            options: ["A. Floor of mouth", "B. Upper lip", "C. Buccal mucosa", "D. Gingiva", "E. Palate"],
+            answer: 0
+        },
+        {
+            q: "7. Differential diagnosis of red lesion in oral cavity will involve all except:",
+            options: ["A. Mycotic infections", "B. Atrophic lichen planus", "C. Systemic lupus erythematosus", "D. Frictional keratosis", "E. Vascular malformations"],
+            answer: 3
+        },
+        {
+            q: "8. The cause of _____ is suggested to be an immunologically induced degeneration of the basal cell layer of the mucosa.",
+            options: ["A. Erythroplakia", "B. Leukoplakia", "C. Lichen planus", "D. Actinic cheilitis", "E. None of the above"],
+            answer: 2
+        }
+    ]
+},
+{
+    id: "sec6",
+    title: "Vascular Anomalies",
+    questions: [
+        {
+            q: "1. With regard to venous malformations, one statement is correct:",
+            options: ["A. They exhibit a demonstrable mitotic activity in the endothelial cells", "B. They are uncommon in the head and neck region", "C. Valsalva maneuver causes them to decrease in size", "D. They can be intraosseous and the mandible is the most commonly involved", "E. None of the above statements is correct"],
+            answer: 3
+        },
+        {
+            q: "2. Among the vascular anomalies, which one of the following is considered the most frequent tumor in childhood?",
+            options: ["A. Arteriovenous malformations", "B. Infantile hemangioma", "C. Venous malformations", "D. Lymphatic malformations", "E. Capillary malformations"],
+            answer: 1
+        },
+        {
+            q: "3. The subclassification of vascular malformations that is based on the type of vessels involves:",
+            options: ["A. Capillary malformations", "B. Arteriovenous malformations", "C. Venous malformations", "D. Lymphatic Malformations", "E. All the above"],
+            answer: 4
+        },
+        {
+            q: "4. A 3-day-old neonate presents with a vascular lesion that was not present at birth but appeared 48 hours later. Which is the most likely diagnosis?",
+            options: ["A. Capillary malformation", "B. Infantile hemangioma", "C. Arteriovenous malformation", "D. Venous malformation"],
+            answer: 1
+        },
+        {
+            q: "5. In the management of a life-threatening hemangioma during its proliferative phase, what is the best first-line pharmacological treatment?",
+            options: ["A. Systemic Prednisolone 2mg/kg", "B. Interferon alpha 2A and B", "C. Nonselective beta-adrenergic receptor blockers", "D. Pulsed dye laser (PDL)"],
+            answer: 2
+        },
+        {
+            q: "6. A clinician is trying to differentiate between a deep hemangioma and a venous malformation in a 4-year-old child. Which finding is pathognomonic?",
+            options: ["A. Palpable thrill and pulsation", "B. Presence of phleboliths", "C. Bony hypertrophy of the adjacent skeleton", "D. Proliferation of vascular endothelial cells"],
+            answer: 1
+        },
+        {
+            q: "7. A patient with a large venous malformation is scheduled for surgery. The surgeon employs deep sutures to divide the lesion before applying sclerosing agents. What is this technique called?",
+            options: ["A. Selective thermolysis", "B. Compartmentalization technique", "C. Nidus resection", "D. Multiplanar reconstruction"],
+            answer: 1
+        }
+    ]
+},
+
+{
+    id: "sec7",
+    title: "Implant Treatment Advanced Concepts",
+    questions: [
+        {
+            q: "1. Which of the following is the most significant disadvantage of immediate post-extraction implant placement?",
+            options: ["A. Increased risk of implant failure due to excessive occlusal forces", "B. Higher incidence of peri-implantitis compared to delayed placement", "C. Increased likelihood of fibrous tissue formation instead of osseointegration", "D. Delayed healing of the extraction socket compared to staged implant placement", "E. Excessive resorption of the alveolar ridge due to premature loading"],
+            answer: 4
+        },
+        {
+            q: "2. In cases of extreme maxillary resorption where conventional implants cannot be placed, which approach provides the most predictable outcome?",
+            options: ["A. Sinus lift with particulate bone grafting", "B. All-on-4 implant placement using tilted implants", "C. Le Fort I osteotomy with interpositional bone grafting", "D. Inferior alveolar nerve repositioning", "E. Zygomatic implants with immediate loading"],
+            answer: 4
+        },
+        {
+            q: "3. When planning a sinus lift procedure, which factor is most critical in determining whether simultaneous implant placement is possible?",
+            options: ["A. The presence of sinus septa", "B. The amount of available residual bone height", "C. The patient's history of sinus infections", "D. The type of grafting material used", "E. The density of the maxillary cortical bone"],
+            answer: 1
+        },
+        {
+            q: "4. Optimal immediate implant position:",
+            options: ["A. The fixture should be placed about 1-2 mm below the buccal plate ideally", "B. The fixture should be placed 2 mm beyond the apex of the extraction socket if room exists", "C. For maxillary anterior, placement into palatal bone and along the palatal wall", "D. All of the above", "E. None of the above"],
+            answer: 3
+        },
+        {
+            q: "5. Following the extraction of the upper first molar, immediate implant can most appropriately be inserted into:",
+            options: ["A. The Mesiobuccal socket", "B. The Distobuccal socket", "C. The Palatal socket", "D. The inter-radicular septum", "E. Immediate implant is contra-indicated in the maxilla"],
+            answer: 3
+        },
+        {
+            q: "6. Bone splitting is used to address:",
+            options: ["A. Insufficient bone height", "B. Lack of sinus membrane space", "C. Inferior alveolar nerve damage", "D. Narrow alveolar ridge width", "E. Increasing bone density"],
+            answer: 3
+        },
+        {
+            q: "7. In guided bone regeneration (GBR), what is the primary purpose of the barrier membrane?",
+            options: ["A. To enhance angiogenesis at the graft site", "B. To maintain mechanical stability of the bone graft", "C. To prevent soft tissue infiltration and allow osteoprogenitor cells to populate the defect", "D. To stimulate fibroblast activity and promote soft tissue healing", "E. To serve as a scaffold for osteoblast differentiation"],
+            answer: 2
+        },
+        {
+            q: "8. What is one advantage of using resorbable materials as barriers in guided bone regeneration?",
+            options: ["A. Eliminating the necessity of removal", "B. Eliminating the need for donor site surgery", "C. Facilitating maintenance of graft shape", "D. Aiding in osseointegration", "E. Preventing fatty tissue ingrowth"],
+            answer: 0
+        },
+        {
+            q: "9. What may be indicated if the gap between the immediate implant and the residual tooth socket is greater than 1 mm?",
+            options: ["A. Immediate loading of the implant", "B. Grafting with a particulate bone material", "C. Drilling the implant site at the correct angulation", "D. Resorbable collagen pellet placement", "E. Primary closure of the extraction site"],
+            answer: 1
+        },
+        {
+            q: "10. What is the role of a guide stent in dental implant placement?",
+            options: ["A. To shape the implant site", "B. To prevent peri-implantitis", "C. To enhance primary stability", "D. To guide the correct position and angulation of implants", "E. To improve osseointegration"],
+            answer: 3
+        },
+        {
+            q: "11. Xenogeneic grafts are grafts taken from:",
+            options: ["A. Another individual of the same species", "B. Same individual", "C. Another species such as bovine bone", "D. All the mentioned statement", "E. None of the mentioned statement"],
+            answer: 2
+        },
+        {
+            q: "12. Regarding zygomatic dental implant: its length is:",
+            options: ["A. 10 mm", "B. 15-25 mm", "C. 5-15 mm", "D. 35-55mm", "E. None of the mentioned information"],
+            answer: 3
+        },
+        {
+            q: "13. The primary function of a GBR membrane in implant dentistry is:",
+            options: ["A. Stimulate bone resorption", "B. Prevent epithelial cell invasion", "C. Enhance blood clot formation", "D. Provide space for soft tissue growth", "E. Speed up healing"],
+            answer: 1
+        },
+        {
+            q: "14. When considering immediate loading of a dental implant, the minimum insertion torque with which the implant must be placed is:",
+            options: ["A. 10-15 N/cm2", "B. 20-25 N/cm2", "C. 30-35 N/cm2", "D. 40-45 N/cm2", "E. None of the above"],
+            answer: 2
+        }
+    ]
+},
+{
+    id: "sec8",
+    title: "Diagnosis and Management of Orofacial Pain",
+    questions: [
+        {
+            q: "1. Which cranial nerve is involved in the transmission of pain from the maxillofacial region?",
+            options: ["A. Optic nerve", "B. Trigeminal nerve", "C. Facial nerve", "D. Hypoglossal nerve", "E. Glossopharyngeal nerve"],
+            answer: 1
+        },
+        {
+            q: "2. Below is a possible etiology of trigeminal neuralgia:",
+            options: ["A. Post-traumatic neuralgia following traumas from some dental procedures", "B. Intracranial tumours such as epidermoid tumours, meningiomas", "C. Arteriovenous malformations, aneurysms, and vascular compression", "D. All of the above", "E. None of the above"],
+            answer: 3
+        },
+        {
+            q: "3. One of the below is NOT a clinical manifestation of Trigeminal Neuralgia:",
+            options: ["A. It manifests as sudden, intermittent, paroxysmal, sharp, shooting, lancinating, shock-like pain", "B. It is elicited by slight touching superficial trigger points radiating across the distribution of one or more branches", "C. Pain is generally confined to one part of one division, rarely crosses the midline", "D. Short-duration pain lasting for 5 to 10 minutes", "E. The paroxysms occur in episodes, each lasting for weeks or months"],
+            answer: 3
+        },
+        {
+            q: "4. Regarding giant cell arteritis all are false except:",
+            options: ["A. Young patients are usually affected", "B. Can affect any vessel but the superficial temporal artery is the most commonly affected site", "C. Laboratory Investigations shows reduced ESR", "D. Treatment is by high-dose systemic antibiotic therapy", "E. It is an inflammatory vasculitis"],
+            answer: 4
+        },
+        {
+            q: "5. What is Analgesia?",
+            options: ["A. Absence of pain in response to stimulation that would normally be painful", "B. Decreased sensitivity to noxious stimulation", "C. Decreased sensitivity to all stimulation", "D. No sensitivity to any stimulation", "E. Unpleasant abnormal sensation"],
+            answer: 0
+        },
+        {
+            q: "6. Regarding trigeminal neuralgia:",
+            options: ["A. Pain is electric-like unilateral pain", "B. Short duration (lasting within second)", "C. Only occurs in response to stimulation a trigger zone (e.g., shaving, eating)", "D. It may go through periods of remission", "E. All the mentioned information"],
+            answer: 4
+        },
+        {
+            q: "7. Excruciating unilateral periorbital burning or piercing pain episodes lasting 30-60 minutes, associated with ipsilateral lacrimation are characteristic of:",
+            options: ["A. Migraine headache", "B. Trigeminal neuralgia", "C. Tension headache", "D. Cluster headache", "E. Giant cell arteritis"],
+            answer: 3
+        },
+        {
+            q: "8. All are Vascular Orofacial Pain except:",
+            options: ["A. Migraine", "B. Post herpetic neuralgia", "C. Giant cell arteritis", "D. Trigeminal neuralgia", "E. B and D"],
+            answer: 4
+        },
+        {
+            q: "9. The presence of trigger zone is a characteristic feature of:",
+            options: ["A. Post herpetic neuralgia", "B. Ramsay Hunt syndrome", "C. Atypical facial pain", "D. Cluster headache", "E. Trigeminal neuralgia"],
+            answer: 4
+        },
+        {
+            q: "10. Which of the following is NOT classified as a type of typical orofacial pain?",
+            options: ["A. Bone pain", "B. Vascular pain", "C. Salivary gland pain", "D. Psychogenic pain", "E. All of above"],
+            answer: 3
+        },
+        {
+            q: "11. Which of the following is a characteristic of migraine headaches?",
+            options: ["A. Unilateral location, pulsating quality, moderate to severe pain", "B. No associated symptoms", "C. An aura may develop several hours before headache", "D. Bilateral location", "E. All of the above"],
+            answer: 0
+        }
+    ]
+},
+
+{
+    id: "sec9",
+    title: "Benign Cystic Lesions Of The Oral Cavity",
+    questions: [
+        {
+            q: "1. Clinical characteristics of an odontogenic keratocyst. All statements are correct, except for:",
+            options: ["A. It is asymptomatic until the cyst reaches a large size", "B. Initially to grow in a laterally direction within the medullary cavity", "C. The observed clinical expansion of the bone occurs late", "D. An enlarging cyst may cause tooth displacement", "E. Percussion of the enlarging cyst may produce a dull sound"],
+            answer: 1
+        },
+        {
+            q: "2. One of the advantages of enucleation of a cyst is:",
+            options: ["A. Preservation of vital structures", "B. Reduced neurological and neoplastic morbidity", "C. Reduced risk of pathological fracture and oral fistula", "D. All of the above", "E. None of the above"],
+            answer: 4
+        },
+        {
+            q: "3. Topical 5-fluorouracil has recently been used in the treatment of:",
+            options: ["A. Gingival cyst", "B. Odontogenic keratocyst", "C. Lateral periodontal cyst and dental radicular cyst", "D. Adenomatoid odontogenic cyst", "E. Calcifying odontogenic cyst"],
+            answer: 1
+        },
+        {
+            q: "4. Which of the following sites is the most common for a dermoid cyst?",
+            options: ["A. Between the lateral incisor and canine", "B. The midline of the floor of the mouth", "C. The midline of the neck above the thyroid cartilage", "D. The lateral aspect of the neck at the anterior border of the sternocleidomastoid muscle", "E. None of the above"],
+            answer: 1
+        },
+        {
+            q: "5. Which diagnostic feature is considered definitive for Basal Cell Naevus Syndrome (Gorlin-Goltz Syndrome)?",
+            options: ["A. The presence of a single odontogenic keratocyst in a child", "B. The presence of multiple odontogenic keratocysts in an adult", "C. The observation of three or more palmar or plantar pits", "D. The finding of a skeletal anomaly such as a cleft lip or palate"],
+            answer: 2
+        },
+        {
+            q: "6. When performing an enucleation, what is the correct orientation and use of a thin-bladed curette to minimize the risk of tearing the cyst wall?",
+            options: ["A. The convex surface faces the bone, and the concave edge performs the stripping", "B. The concave surface faces the bone, and the convex edge performs the stripping", "C. The concave surface faces the cyst, and the convex edge scrapes the bony wall", "D. The convex surface faces the cyst, and the concave edge scrapes the bony wall"],
+            answer: 1
+        },
+        {
+            q: "7. A radiograph shows a radiolucency with 'pseudoloculation' around the crown of an impacted lower third molar. Which condition explains this?",
+            options: ["A. Odontogenic Keratocyst due to its aggressive destructive characteristics", "B. Ameloblastoma due to the presence of multiple internal septa", "C. Dentigerous cyst due to bony ridges on the inside of the cavity being superimposed", "D. Calcifying Odontogenic Cyst due to flecks of dense calcification"],
+            answer: 2
+        },
+        {
+            q: "8. Which is a key differentiator between the Orthokeratinised Odontogenic Cyst and the true Odontogenic Keratocyst (OKC)?",
+            options: ["A. The Orthokeratinised type is more likely to recur than the parakeratinised type", "B. The Orthokeratinised type is frequently associated with Basal Cell Naevus Syndrome", "C. The Orthokeratinised type exhibits lower proliferative activity", "D. The Orthokeratinised type is always identified preoperatively by its scalloped margins"],
+            answer: 2
+        },
+        {
+            q: "9. In the surgical treatment of a Radicular Cyst, under what condition is a biopsy considered unnecessary?",
+            options: ["A. When the cyst is associated with a non-vital, carious tooth", "B. When there is evidence of root resorption or a poorly defined margin", "C. When the clinical and radiographic features are readily recognized", "D. When the lesion is located in the maxilla rather than the mandible"],
+            answer: 2
+        },
+        {
+            q: "10. A 'Nasopalatine Duct Cyst' may appear heart-shaped on an anterior occlusal film. What is the anatomical reason?",
+            options: ["A. The divergence of the root apices of the central incisors", "B. The superimposition of the anterior nasal spine over the radiolucency", "C. The presence of a corticated outline within the incisive canal", "D. The cyst originating specifically at the oral end of the papilla"],
+            answer: 1
+        }
+    ]
+},
+{
+    id: "sec10",
+    title: "Preprosthetic Surgery",
+    questions: [
+        {
+            q: "1. What is the primary purpose of alveoloplasty in dental procedures?",
+            options: ["A. To completely remove the mandible pulp for denture placement", "B. To contour the alveolar ridge while preserving as much bone and soft tissue as possible", "C. To encourage rapid healing after tooth extractions", "D. To increase the height of the alveolar ridge for better denture stability", "E. To remove all soft tissues from the alveolar ridge"],
+            answer: 1
+        },
+        {
+            q: "2. Surgical reduction of the lingual mandibular tori is necessary when they are large or sharp before the construction of a complete denture because they cause:",
+            options: ["A. Pain due to denture pressure", "B. Damaging the covered mucosa", "C. Dislodgement of denture by lingual muscle", "D. Dislodgement of lingual muscle by repeated pressure of denture", "E. All of the above"],
+            answer: 0
+        },
+        {
+            q: "3. Which direction of bone loss is primarily observed in onlay bone grafts over time?",
+            options: ["A. Horizontal bone loss", "B. Vertical bone loss", "C. Complete bone resorption", "D. Cortical bone loss", "E. Trabecular bone loss"],
+            answer: 0
+        },
+        {
+            q: "4. One of the most serious complications involved in the chin tubercle reduction procedure is:",
+            options: ["A. Over-reduction of the tubercle", "B. Under-reduction of the tubercle", "C. Partial detachment of the mentalis muscle", "D. Injury to the inferior mandibular canal", "E. None of the above"],
+            answer: 3
+        },
+        {
+            q: "5. The potential complications of maxillary tuberosity lipectomy include all of the following except:",
+            options: ["A. Perforation into the maxillary sinus", "B. Double flap inversion", "C. Perforation into the floor of the nasal cavity", "D. Postoperative hematoma", "E. None of the above"],
+            answer: 1
+        },
+        {
+            q: "6. The frenectomy of a tight lingual frenum requires an incision in the fibrous connective tissue ligament:",
+            options: ["A. At the perimeter of the tongue", "B. At the base of the tongue", "C. At the base of the internal oblique ridge", "D. At the anterior inferior border of the mandible", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "7. Possible complications during excision of palatal torus:",
+            options: ["A. Bleeding-injury to nasopalatine vessels", "B. Fracture of the lateral pterygoid plate", "C. Oronasal/oroantral fistula", "D. Damage blood supply to the maxillary teeth", "E. All of the above"],
+            answer: 2
+        },
+        {
+            q: "8. Dean's technique in the preprosthetic surgery involves removing the:",
+            options: ["A. Alveolar ridge irregularities", "B. Interseptal bone", "C. Labial cortex", "D. Lingual cortex", "E. Maxillary tuberosity"],
+            answer: 1
+        },
+        {
+            q: "9. When performing a maxillary labial frenectomy when the base of the frenum is extremely wide, the most effective surgical technique is:",
+            options: ["A. Z-plasty", "B. Simple excision (diamond excision)", "C. Localized vestibuloplasty", "D. Kazanjian technique (lip switch)", "E. All of the above are equally effective"],
+            answer: 2
+        },
+        {
+            q: "10. During the removal of mylohyoid ridge which of the following nerves should be protected?",
+            options: ["A. Mental nerve", "B. Lingual nerve", "C. Mylohyoid nerve", "D. Inferior dental nerve", "E. None of above"],
+            answer: 1
+        },
+        {
+            q: "11. A 65-year-old patient presents with excessive, hypermobile tissue on their alveolar ridge following denture use. Management would likely involve:",
+            options: ["A. Excision of the entire hypermobile tissue with primary closure", "B. Relining the denture with a softer liner", "C. Topical corticosteroid application to reduce inflammation", "D. Vestibuloplasty", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "12. Most common sites for bone exostosis in the mandible is:",
+            options: ["A. Lingual side of lower premolar", "B. Lingual side of lower incisor", "C. Vestibular side of lower premolar", "D. Labial side of lower incisor", "E. None of above"],
+            answer: 0
+        }
+    ]
+},
+
+{
+    id: "sec11",
+    title: "Orthognathic Surgery",
+    questions: [
+        {
+            q: "1. In orthognathic surgery, mock surgery is a term that describes:",
+            options: ["A. Two-dimensional (2D) soft tissue profile prediction planning", "B. Designing splints using 3D computer technology", "C. Sectioning study models to determine the direction and distance of surgical movement", "D. Superimposition of the digital photographs on the 3D CT data", "E. None of the above"],
+            answer: 2
+        },
+        {
+            q: "2. In the latency phase of distraction osteogenesis, one of the following occurs:",
+            options: ["A. Early stages of bone healing at the osteotomy bone interface", "B. The osteotomy is completed", "C. The distraction appliance is placed", "D. The distraction appliance is activated", "E. The regenerate bone mineralizes"],
+            answer: 0
+        },
+        {
+            q: "3. Regarding the radiographic evaluation for a patient requires orthognathic surgery which of the following is true:",
+            options: ["A. Lateral cephalometric and panoramic radiographs are routinely used", "B. In complex cases, detailed 3D images of the facial skeleton may be helpful", "C. A stereolithic 3D model from CT data may provide useful information", "D. Computerized digital technology helps integrate cephalometric data with digital images", "E. All of the above"],
+            answer: 4
+        },
+        {
+            q: "4. Which of the following about the bilateral sagittal split osteotomy (BSSO) technique is NOT true?",
+            options: ["A. The BSSO is accomplished through an extra oral skin incision", "B. The osteotomy splits the ramus and posterior body of the mandible in a sagittal fashion", "C. It can be used for treatment of mandibular deficiency", "D. Disadvantages include potential trauma of the inferior alveolar nerve", "E. It can be used for treatment of mandibular excess"],
+            answer: 0
+        },
+        {
+            q: "5. During genioplasty there is chances of injuring:",
+            options: ["A. Marginal mandibular branch of the facial nerve", "B. Long buccal nerve", "C. Mental nerve", "D. Lingual nerve", "E. Hypoglossal nerve"],
+            answer: 2
+        },
+        {
+            q: "6. Currently, the most popular technique for mandibular advancement is:",
+            options: ["A. Bilateral sagittal split osteotomy", "B. Vertical subsigmoid osteotomy", "C. Subapical osteotomy", "D. Body osteotomy", "E. Oblique subsigmoid osteotomy"],
+            answer: 0
+        },
+        {
+            q: "7. The primary technique for correction of maxillary deficiency is:",
+            options: ["A. Total subapical osteotomy", "B. Le Fort I osteotomy", "C. Bilateral sagittal split osteotomy (BSSO)", "D. Advancement genioplasty", "E. Le Fort III osteotomy"],
+            answer: 1
+        },
+        {
+            q: "8. The evaluation of the facial profile allows assessment of:",
+            options: ["A. Jaw relationship and facial convexity", "B. Paranasal regions", "C. Lower lip to submental plane angle", "D. Mandibular plane angle", "E. All the above"],
+            answer: 4
+        },
+        {
+            q: "9. The bilateral sagittal split osteotomy, one statement is incorrect:",
+            options: ["A. It is indicated for the correction of mandibular retrognathism", "B. It is one of the most popular and versatile procedures in mandibular orthognathic surgery", "C. It allows mandibular setback", "D. It is indicated for the correction of mandibular asymmetry", "E. It is accomplished through an extraoral incision"],
+            answer: 4
+        },
+        {
+            q: "10. The most common bimaxillary orthognathic surgery is:",
+            options: ["A. Le Fort I osteotomy and vertical ramus osteotomy", "B. Le Fort I osteotomy and bilateral sagittal split osteotomy", "C. Le Fort II osteotomy and bilateral sagittal split osteotomy", "D. Two-piece or three-piece Le Fort I osteotomy", "E. Bilateral sagittal split osteotomy and genioplasty"],
+            answer: 1
+        },
+        {
+            q: "11. Mock surgery is:",
+            options: ["A. Le Fort I osteotomy", "B. Le Fort II osteotomy", "C. Sagittal split osteotomy", "D. Performed on models to mimic the planned orthognathic surgical procedure", "E. Genioplasty"],
+            answer: 3
+        },
+        {
+            q: "12. Possible advantages of distraction osteogenesis include:",
+            options: ["A. The ability to produce larger skeletal movements", "B. Better long-term stability", "C. Less trauma to the TMJs", "D. Decreased neurosensory loss", "E. All the above"],
+            answer: 4
+        },
+        {
+            q: "13. Vertical maxillary excess (VME) can be best shown clinically by:",
+            options: ["A. Cl III skeletal relationship", "B. Gummy smile", "C. Increased overjet", "D. Increased overbite", "E. Cross bite"],
+            answer: 1
+        },
+        {
+            q: "14. Regarding distraction osteogenesis, each of the following statements is true EXCEPT:",
+            options: ["A. One significant advantage is distraction histogenesis that permits soft tissues adaptation", "B. During the latency phase the distraction appliance is not activated", "C. The appliance is removed once the appropriate amount of distraction has been achieved", "D. With distraction osteogenesis, the need for bone grafts can be eliminated", "E. Surgical relapse can be minimized by the use of distraction osteogenesis"],
+            answer: 2
+        },
+        {
+            q: "15. Disadvantage of cryosurgery for the treatment of oral lesions. All statements are true EXCEPT:",
+            options: ["A. Damage to nearby healthy tissue", "B. Significant postoperative edema", "C. Not used to cut tissues", "D. The whole lesion being available for histopathological study", "E. Dysplastic changes can be potentiated"],
+            answer: 3
+        }
+    ]
+},
+
+{
+    id: "sec12",
+    title: "Laser and Cryosurgery in Oral and Maxillofacial Surgery",
+    questions: [
+        {
+            q: "1. Which laser type has a high affinity for hydroxyapatite and water?",
+            options: ["A. Diode laser", "B. Erbium laser", "C. Argon laser", "D. Nd:YAG laser", "E. Helium-neon laser"],
+            answer: 1
+        },
+        {
+            q: "2. Cryosurgery primarily involves the use of:",
+            options: ["A. High-frequency waves", "B. Extreme heat", "C. Liquid nitrogen", "D. Laser beams", "E. Radiofrequency waves"],
+            answer: 2
+        },
+        {
+            q: "3. Which laser type is considered the treatment of choice for oral lesions such as leukoplakia or lichen planus?",
+            options: ["A. Carbon dioxide (CO2) laser", "B. Neodymium-doped yttrium aluminum garnet (Nd:YAG) laser", "C. Erbium-doped yttrium aluminum garnet (Er:YAG) laser", "D. Diode laser", "E. Argon laser"],
+            answer: 0
+        },
+        {
+            q: "4. Advantages of laser using:",
+            options: ["A. Excision of wide areas with minimal scarring", "B. Skin or mucosal graft is needed", "C. Reduce bleeding, pain and healing time", "D. Potentiating of malignant changes", "E. A & C"],
+            answer: 4
+        },
+        {
+            q: "5. The laser light differs completely from natural light due to its peculiar characteristics:",
+            options: ["A. Monochromatic", "B. Multidirectional", "C. Coherent", "D. A and C", "E. Wide beam"],
+            answer: 3
+        },
+        {
+            q: "6. Cryosurgery can be used effectively in all of the following conditions except:",
+            options: ["A. Superficial basal cell carcinoma", "B. Intractable facial pain", "C. Oral squamous cell carcinoma", "D. Viral warts", "E. Some vascular malformations and hemangioma"],
+            answer: 2
+        },
+        {
+            q: "7. Which is a potential hazard associated with laser use in oral surgery?",
+            options: ["A. Excessive bleeding during surgery", "B. Smoke plume containing toxic chemicals and viruses", "C. Rapid tissue regeneration", "D. Decreased risk of mucosal grafting", "E. All of above"],
+            answer: 1
+        }
+    ]
+},
+{
+    id: "sec13",
+    title: "Odontogenic Diseases of The Maxillary Sinus",
+    questions: [
+        {
+            q: "1. Which root of the upper posterior teeth is closest to the floor of the maxillary sinus?",
+            options: ["A. The buccal root of the first upper premolar", "B. The palatal root of the upper first molar", "C. The mesiobuccal root of the upper second molar", "D. The distobuccal root of the upper second molar", "E. The palatal root of the upper third molar"],
+            answer: 1
+        },
+        {
+            q: "2. The palatal flap has a high success rate in treating OAF because of:",
+            options: ["A. Abundance of tissue", "B. The palatal artery branch is also mobilized", "C. It is resistant to infection", "D. Underlying fatty tissue has less possibility of tearing", "E. It is very easy from a technical point of view"],
+            answer: 1
+        },
+        {
+            q: "3. Following the repair of an oroantral communication, postoperative instructions should include:",
+            options: ["A. Asking the patient not to blow their nose", "B. Asking the patient not to smoke", "C. Asking the patient not to cough with a closed mouth", "D. All of the mentioned information", "E. None of the mentioned information"],
+            answer: 3
+        },
+        {
+            q: "4. The most popular imaging for evaluating abnormalities of the maxillary sinus is:",
+            options: ["A. Posteroanterior view", "B. Occipitomental view", "C. Computed tomography", "D. Panoramic radiographs", "E. Lateral view"],
+            answer: 1
+        },
+        {
+            q: "5. Regarding buccal advancement flap that is used to close oroantral fistula:",
+            options: ["A. It may result in decrease in the height of the buccal sulcus (shallow buccal vestibule)", "B. The flap must include the greater palatine artery", "C. The flap is rotated to close the defect", "D. It must performed under general anaesthesia", "E. None of the mentioned information"],
+            answer: 0
+        },
+        {
+            q: "6. If 2 mm oroantral communication develops after extraction of upper first molar. What is the proper management?",
+            options: ["A. No surgical treatment is necessary, give antibiotics and analgesics", "B. Conservative treatment with figure-of-eight suture and sinus precautions", "C. Primary closure should be obtained with buccal flap", "D. Primary closure should be obtained with palatal flap", "E. None of the above"],
+            answer: 1
+        }
+    ]
+},
+
+{
+    id: "sec14",
+    title: "Oral Cancer (Diagnosis and Treatment Planning)",
+    questions: [
+        {
+            q: "1. Which of the following is the most important independent prognostic factor for disease-free survival and overall survival in OSCC?",
+            options: ["A. Tumor size", "B. Depth of invasion", "C. Pattern of invasion", "D. Perineural invasion", "E. Lymphovascular invasion"],
+            answer: 1
+        },
+        {
+            q: "2. In which scenario is sentinel lymph node biopsy (SLNB) most appropriately used in OSCC?",
+            options: ["A. T4 tumors with extensive local invasion", "B. T1-T2 tumors with clinically node-negative (cN0) status", "C. Tumors with extranodal extension (ENE)", "D. Tumors with distant metastasis (M1)", "E. Tumors involving the retromolar trigone"],
+            answer: 1
+        },
+        {
+            q: "3. In patients with OSCC of the tongue, what is the most common reason for performing elective neck dissection in early-stage (T1-T2) tumors?",
+            options: ["A. To facilitate adjuvant radiation therapy", "B. To allow better reconstruction after tumor removal", "C. To address the high likelihood of occult lymph node metastasis", "D. To reduce local recurrence at the primary tumor site", "E. To determine eligibility for postoperative chemotherapy"],
+            answer: 2
+        },
+        {
+            q: "4. TNM Clinical Staging System for Oral Squamous Cell Carcinoma:",
+            options: ["A. Tx means no evidence of primary tumor", "B. Tis means Carcinoma in situ", "C. T1 means Tumor size more than 2 cm", "D. T2 means Tumor size 4-6 cm", "E. T3 means Tumor size less than 4 cm"],
+            answer: 1
+        },
+        {
+            q: "5. What is the importance of obtaining the correct depth of invasion in a biopsy?",
+            options: ["A. It helps in documentation", "B. It affects the stage of the lesion and the need for elective neck dissection", "C. It indicates the presence of dysplasia", "D. It determines the size of the lesion", "E. It increases the chance of obtaining a correct histologic diagnosis"],
+            answer: 1
+        },
+        {
+            q: "6. Which nodal levels are at highest risk for early dissemination by metastatic cancer in primary tumors of the oral cavity?",
+            options: ["A. Levels I, II, and III", "B. Levels IV, V, and VI", "C. Levels II, III, and IV", "D. Levels III, IV, and V", "E. Levels V, VI, and VII"],
+            answer: 0
+        },
+        {
+            q: "7. Radiologically, the mandibular invasion by squamous cell carcinoma arising in floor of mouth is best assessed by:",
+            options: ["A. OPG", "B. Ultrasonography", "C. CT scan", "D. PET scan", "E. Bone scan"],
+            answer: 2
+        }
+    ]
+},
+{
+    id: "sec15",
+    title: "Oral Cancer (Management)",
+    questions: [
+        {
+            q: "1. One of the following is considered as absolute indication for postoperative irradiation in treatment of cancer in oral and maxillofacial region:",
+            options: ["A. Two or more involved cervical lymph nodes", "B. Extracapsular spread of involved lymph nodes", "C. The presence of lymphovascular space invasion", "D. Perineural invasion", "E. Close (less than 5 mm) margins at the primary tumor resection site"],
+            answer: 1
+        },
+        {
+            q: "2. Radical neck dissection:",
+            options: ["A. Involves the clearance of I-V lymph nodes with the spinal accessory nerve, internal jugular vein, and the sternocleidomastoid muscle all together", "B. Involves the removal of supra-omohyoid lymph nodes only", "C. Involves the preservation of functional structures while removing cervical lymph nodes", "D. All of the above", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "3. If chemotherapy is administered before radiotherapy, it is termed:",
+            options: ["A. Adjuvant", "B. Subsequent", "C. Neoadjuvant", "D. Synchronous", "E. Concomitant"],
+            answer: 2
+        },
+        {
+            q: "4. The characteristic changes in lymph nodes on CT and MRI suggestive of metastatic SCC include all the following except:",
+            options: ["A. Enhancement", "B. Poorly circumscribed margins", "C. The most metastatic nodes are spherical in shape", "D. Peripheral necrosis", "E. Nodal size in excess of 1 cm in diameter"],
+            answer: 3
+        },
+        {
+            q: "5. Restricted tongue mobility can indicate which of the followings in oral cancer:",
+            options: ["A. Invasion of deep tongue muscles", "B. Invasion of superficial tongue muscles", "C. X cranial nerve involvement", "D. IX Cranial nerve involvement", "E. III cranial nerve involvement"],
+            answer: 0
+        },
+        {
+            q: "6. Appropriate soft tissue margins for resection of squamous cell carcinoma of the oral cavity are:",
+            options: ["A. 0.25-0.75 cm", "B. 1.0-1.5 cm", "C. 2.0-2.5 cm", "D. 3.0-3.5 cm", "E. None of the above"],
+            answer: 1
+        },
+        {
+            q: "7. All of the following is indication of Postoperative radiotherapy EXCEPT:",
+            options: ["A. Involved (positive) margins at the primary tumor resection site", "B. Extracapsular spread", "C. Close (less than 5 mm) margins", "D. One involved cervical lymph node", "E. Perineural invasion"],
+            answer: 3
+        },
+        {
+            q: "8. Regarding the selective neck dissection, one of the following is true:",
+            options: ["A. One or more non-lymphatic structures are preserved during the dissection", "B. One or more lymph node groups are preserved during cervical lymphadenectomy", "C. The en-bloc removal of all ipsilateral lymph nodes", "D. One or more lymph node groups or nonlymphatic structures not usually involved in RND are removed", "E. None of the above"],
+            answer: 1
+        }
+    ]
+},
+
+{
+    id: "sec16",
+    title: "Principles Of Reconstructive Surgery Of Defects Of The Jaws",
+    questions: [
+        {
+            q: "1. A random pattern flap used in closure of oroantral fistula is:",
+            options: ["A. Temporalis muscle flap", "B. Buccal advancement flap", "C. Buccal fat pad flap", "D. Tongue flap", "E. Palatal flap"],
+            answer: 1
+        },
+        {
+            q: "2. Bone morphogenetic proteins provide:",
+            options: ["A. Osteoinduction", "B. Osteogenesis", "C. Osteoconduction", "D. All the above", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "3. Concerning reconstruction of a mandibular defect with vascularized free tissue transfer, one statement is incorrect:",
+            options: ["A. Permit simultaneous hard-tissue and soft-tissue reconstruction", "B. Less technique-sensitive than non-vascularized autogenous bone grafts", "C. Resist infection in the presence of oral contamination", "D. Allow rapid dental rehabilitation with dental implants", "E. Longer operating time than non-vascularized autogenous bone grafts"],
+            answer: 1
+        },
+        {
+            q: "4. Regarding allogeneic grafts:",
+            options: ["A. It offers a hard tissue matrix for phase II osteogenesis", "B. It does not provide viable cells for phase I osteogenesis", "C. It does not require another site of operation in the patient", "D. All the mentioned statement", "E. None of the mentioned statement"],
+            answer: 3
+        },
+        {
+            q: "5. Which of the following is a possible option for the reconstruction of maxilla?",
+            options: ["A. Obturator", "B. Vascularized bone graft", "C. Temporalis muscle flap", "D. All of the above", "E. None of the above"],
+            answer: 3
+        },
+        {
+            q: "6. Which option is considered the best for reconstruction of mandibular defect resulting from segmental resection of a large ameloblastoma?",
+            options: ["A. Reconstruction plate only", "B. Reconstruction plate with non-vascularized bone graft", "C. Free vascularized fibula flap", "D. Pedicled flap", "E. All of the above"],
+            answer: 2
+        },
+        {
+            q: "7. When the graft acts as a 3D scaffold on which the cells are able to form new bone, it is termed:",
+            options: ["A. Osteoinduction", "B. Osteogenesis", "C. Osteoconduction", "D. Autotransplantation", "E. None of the above"],
+            answer: 2
+        },
+        {
+            q: "8. Concerning the surgical principles of maxillofacial bone grafting procedures, one statement is incorrect:",
+            options: ["A. All bone grafts must be covered on all sides by soft tissue", "B. The graft must be rigidly immobilized to remaining mandibular fragments", "C. Prophylactic antibiotics are beneficial in reducing the incidence of infection", "D. An intraoral approach should be used whenever possible", "E. The residual mandibular segments should be stabilized in normal position"],
+            answer: 3
+        },
+        {
+            q: "9. Autogenous bone grafts are:",
+            options: ["A. Composed of bone from the same individual", "B. The only type of bone graft that supply living, immuno-compatible bone cells essential to phase I osteogenesis", "C. The iliac crest can be used as a source for this type of graft", "D. All the mentioned statement", "E. None of the mentioned statement"],
+            answer: 3
+        },
+        {
+            q: "10. The best bone graft utilized in reconstruction of large mandibular defect is:",
+            options: ["A. Costochondral graft", "B. Calvarial graft", "C. Iliac crest graft", "D. Metatarsal bone graft", "E. Hydroxyapatite granules"],
+            answer: 2
+        },
+        {
+            q: "11. Regarding the microvascular free tissue transfer:",
+            options: ["A. It utilizes tissue transferred from a different part of the body", "B. Unlike local or regional flaps", "C. It requires the detachment of the feeding vessels and transfer of the flap to the recipient site", "D. It requires anastomosing the vessels to a recipient artery and vein or veins", "E. All the above true"],
+            answer: 4
+        },
+        {
+            q: "12. Examples of the axial flaps include each of the following except:",
+            options: ["A. Temporalis muscle flap", "B. Buccal advancement flap", "C. Pectoralis major flap", "D. Forehead flap", "E. Palatal rotational flap"],
+            answer: 1
+        },
+        {
+            q: "13. Donor site morbidity occurs when _____ is used:",
+            options: ["A. Xenograft", "B. Autograft", "C. Allograft", "D. A & B", "E. All of the above"],
+            answer: 1
+        },
+        {
+            q: "14. What does osteoinduction refer to in bone regeneration?",
+            options: ["A. Formation of new bone from host-derived osteoprogenitor cells", "B. Formation of bone from transplanted osteoprogenitor cells", "C. Stimulation of differentiation of osteoprogenitor cells into osteoblasts by bone inductive proteins", "D. Passive formation of bone along a biologic framework", "E. Formation of bone from transplanted fully differentiated osteocompetent cells"],
+            answer: 2
+        },
+        {
+            q: "15. Why are extraoral incisions preferred in bone grafting procedures?",
+            options: ["A. They provide better stability for the graft", "B. They ensure better osseous healing", "C. They offer better access to the oral cavity", "D. They reduce exposure to oral flora, minimizing infection risks", "E. They enable direct visualization of the grafting site"],
+            answer: 3
+        }
+    ]
+},
+
+{
+    id: "sec17",
+    title: "Odontogenic Tumors",
+    questions: [
+        {
+            q: "1. Odontogenic tumors:",
+            options: ["A. An odontoma is unlikely to form in a tooth's place", "B. The biological behavior of odontogenic tumors is often malignant", "C. Malignant odontogenic tumors are common", "D. Many appear as incidental findings in radiographs", "E. Tooth displacement is not a feature of an odontoma"],
+            answer: 3
+        },
+        {
+            q: "2. Which best differentiates an ameloblastoma from an odontogenic keratocyst (OKC) on radiographic examination?",
+            options: ["A. Both lesions are radiolucent and cause root resorption", "B. Ameloblastomas expand primarily in an anteroposterior direction, while OKCs expand in a buccolingual direction", "C. Ameloblastomas often affect unerupted teeth, while OKCs do not", "D. Ameloblastomas appear as a honeycomb or soap bubble, while OKCs appear with a scalloped border", "E. OKCs often cause pain and numbness, while ameloblastomas are usually asymptomatic"],
+            answer: 1
+        },
+        {
+            q: "3. Which odontogenic tumor has the highest potential for local recurrence despite enucleation and curettage?",
+            options: ["A. Adenomatoid odontogenic tumor", "B. Ameloblastoma", "C. Squamous odontogenic tumor", "D. Cementifying fibroma", "E. Compound odontoma"],
+            answer: 1
+        },
+        {
+            q: "4. Regarding ameloblastoma:",
+            options: ["A. The unicystic variant is the most aggressive", "B. The term 'extraosseous ameloblastoma' is a synonym for a solid ameloblastoma", "C. These lesions are less likely to spread across the mandible than the maxilla", "D. A multicystic ameloblastoma can cause buccal and lingual expansion", "E. Solid ameloblastoma should be resected with safe bone and soft tissue margins"],
+            answer: 4
+        },
+        {
+            q: "5. The term odontogenic tumors is derived from the fact that all these tumors:",
+            options: ["A. Are closely associated radiographically with impacted teeth", "B. Are resembling the tooth structures both radiographically and histologically", "C. Are originating from the same tooth-forming apparatus", "D. Are all composed only of odontogenic epithelium without any ectomesenchymal elements", "E. All of the above"],
+            answer: 2
+        },
+        {
+            q: "6. Odontogenic tumors:",
+            options: ["A. Sometimes an odontogenic tumor forms in place of a tooth", "B. The biological behavior of odontogenic tumors is usually malignant", "C. Resorption of associated tooth is a common radiographic finding", "D. A and C", "E. None of the above"],
+            answer: 4
+        },
+        {
+            q: "7. Which of the following is NOT a benign epithelial odontogenic tumor?",
+            options: ["A. Adenomatoid odontogenic tumor", "B. Squamous odontogenic tumor", "C. Calcifying epithelial odontogenic tumor", "D. Ameloblastic fibroma", "E. Ameloblastoma"],
+            answer: 3
+        },
+        {
+            q: "8. The objectives of surgical management of odontogenic tumor is to:",
+            options: ["A. Eradication of the lesion", "B. Preservation of normal tissue to the possible extent", "C. Restoration of significant tissue loss, form, and function", "D. All the mentioned statement", "E. None of the mentioned statement"],
+            answer: 3
+        },
+        {
+            q: "9. The recommended treatment of luminal unicystic ameloblastoma is:",
+            options: ["A. Enucleation", "B. Wide excision", "C. Resection without continuity defect", "D. Resection with continuity defect", "E. Resection with continuity defect and immediate reconstruction"],
+            answer: 0
+        },
+        {
+            q: "10. Which radiographic feature helps distinguish between complex and compound odontomas?",
+            options: ["A. Presence of recognizable enamel and dentin", "B. Appearance of a radiolucent mass with varying densities", "C. Predominance of radiopaque masses of dental hard tissues", "D. Location within the posterior mandible or anterior maxilla", "E. Cannot be distinguished on radiograph"],
+            answer: 3
+        }
+    ]
+},
+{
+    id: "sec18",
+    title: "Non-Odontogenic Tumors",
+    questions: [
+        {
+            q: "1. The Non-odontogenic tumors that occur in a symmetric form, and the lesions regress as the patient ages and bone growth ceases is:",
+            options: ["A. Brown tumor of hyperparathyroidism", "B. Central giant cell granuloma (CGCG)", "C. Cherubism", "D. Aneurysmal bone cysts", "E. None of the mentioned statement"],
+            answer: 2
+        },
+        {
+            q: "2. In the context of non-odontogenic tumors, which syndrome is characterized by polyostotic fibrous dysplasia, cafe-au-lait pigmentation, and endocrine abnormalities?",
+            options: ["A. McCune-Albright syndrome", "B. Jaffe-Lichtenstein syndrome", "C. Mazabraud syndrome", "D. Treacher Collins syndrome", "E. Gorlin-Goltz syndrome"],
+            answer: 0
+        },
+        {
+            q: "3. Periapical cemento-osseous dysplasia can be differentiated from periapical lesion by:",
+            options: ["A. Percussion", "B. Palpation", "C. Vitality test", "D. Radiograph", "E. All of above"],
+            answer: 2
+        },
+        {
+            q: "4. Ossifying Cementofying Fibroma (OCF):",
+            options: ["A. They are slow growing in young patients, but aggressive in the older age group", "B. They cause teeth displacement", "C. OCF usually presents as ill-demarcated mixed radiolucency/radiopacity", "D. The lesions are usually solitary and most commonly occur in the maxilla", "E. None of the above"],
+            answer: 1
+        },
+        {
+            q: "5. Regarding Brown tumor, which statement is FALSE?",
+            options: ["A. This lesion is a result of bone resorption in a setting of increased parathyroid hormone level", "B. Serum calcium, serum phosphate and alkaline phosphate levels are increased", "C. In the pediatric population this is associated with chronic renal failure", "D. It is histologically indistinguishable from CGCG", "E. It is non-odontogenic tumor of the jaw"],
+            answer: 1
+        },
+        {
+            q: "6. Intramuscular myxomas occur in:",
+            options: ["A. McCune-Albright syndrome", "B. Mazabraud syndrome", "C. Gardner syndrome", "D. Jaffe-Lichtenstein syndrome", "E. Gorlin-Goltz syndrome"],
+            answer: 1
+        },
+        {
+            q: "7. Regarding clinical finding of Giant cell lesions of the maxillofacial skeleton (CGCG):",
+            options: ["A. It could be slowly growing, asymptomatic radiolucency discovered on routine radiographs", "B. It could be rapidly expanding, aggressive tumors with pain, root resorption, and high recurrence rate", "C. It is consisting of fibrous tissue containing multinucleated giant cells", "D. All the mentioned statement", "E. None of the mentioned statement"],
+            answer: 3
+        },
+        {
+            q: "8. Which lesion is typically seen at the apices of vital anterior mandibular teeth in middle-aged females?",
+            options: ["A. Fibrous dysplasia", "B. Aneurysmal bone cyst", "C. Cherubism", "D. Cementoblastoma", "E. Periapical cemento-osseous dysplasia"],
+            answer: 4
+        },
+        {
+            q: "9. Which of the following is NOT a giant cell lesion?",
+            options: ["A. Aneurysmal bone cyst", "B. Brown tumor of hyperparathyroidism", "C. Central giant cell granuloma", "D. Cherubism", "E. Desmoplastic fibroma"],
+            answer: 4
+        }
+    ]
+},
+
+{
+    id: "sec19",
+    title: "Salivary Gland Diseases",
+    questions: [
+        {
+            q: "1. Frey's syndrome usually occurs following:",
+            options: ["A. Submandibular salivary gland removal", "B. Parotidectomy", "C. Sublingual gland removal", "D. Excision of minor salivary gland tumor", "E. Removal of salivary stone"],
+            answer: 1
+        },
+        {
+            q: "2. Concerning pleomorphic adenoma which of the following is NOT true:",
+            options: ["A. The tumor arises from the myoepithelial cell giving the name 'mixed tumor'", "B. Most commonly affects the parotid gland, followed by minor salivary glands of the palate", "C. Appear as painless nodular, firm growth with no ulceration of the overlying skin", "D. Surgical removal with facial nerve preservation followed by radiotherapy is the treatment of choice", "E. Long standing untreated benign pleomorphic adenomas may undergo malignant transformation"],
+            answer: 3
+        },
+        {
+            q: "3. Sialography is contraindicated in:",
+            options: ["A. Salivary duct stone", "B. Salivary duct stricture", "C. Acute sialadenitis", "D. Sjogren syndrome", "E. All of the above"],
+            answer: 2
+        },
+        {
+            q: "4. Ultrasonic investigations for salivary gland pathology:",
+            options: ["A. Is considered as invasive investigation", "B. Is contraindicated for sialolithiasis", "C. Distinguishes between benign and malignant tumors", "D. All the above", "E. None of the above"],
+            answer: 4
+        },
+        {
+            q: "5. Tumors of salivary glands, all the following are true EXCEPT:",
+            options: ["A. Malignant tumors are more common in major salivary gland", "B. Malignant tumors show more rapid growth compared to benign tumors", "C. Pain and ulceration are common findings in benign salivary gland tumors", "D. Salivary gland tumors are radiosensitive", "E. None of the above"],
+            answer: 2
+        },
+        {
+            q: "6. What is the treatment of choice for a ranula?",
+            options: ["A. Surgical removal of the sublingual gland", "B. Incision and drainage", "C. Surgical removal of the submandibular gland", "D. Marsupialization", "E. Sclerotherapy"],
+            answer: 0
+        },
+        {
+            q: "7. Swelling on the anterior floor of the mouth is soft and painless, present for several months, overlying mucosa is bluish. The most common diagnosis is:",
+            options: ["A. Mucus retention or extravasation cyst", "B. Mixed salivary gland tumor", "C. Infected periodontal abscess", "D. Carcinoma of the floor of the mouth", "E. None of the above"],
+            answer: 0
+        },
+        {
+            q: "8. Sialography cannot be used in:",
+            options: ["A. Salivary duct stone", "B. Salivary duct stricture", "C. Acute viral parotitis", "D. Sjogren syndrome", "E. None of the above"],
+            answer: 4
+        },
+        {
+            q: "9. The treatment of stone located within the hilum of submandibular gland is:",
+            options: ["A. Dilation of the orifice of Wharton's duct", "B. Sialodochotomy", "C. Sialodochoplasty", "D. Sialoadenectomy", "E. All of the above"],
+            answer: 3
+        },
+        {
+            q: "10. Mumps:",
+            options: ["A. It is known as epidemic parotitis", "B. Caused by paramyxovirus", "C. Associated with trismus, pain on mastication and cervical lymphadenitis", "D. Transmitted by salivary droplets", "E. All of the above"],
+            answer: 4
+        },
+        {
+            q: "11. What are the clinical symptoms of submandibular gland obstruction?",
+            options: ["A. Enlarged firm submandibular gland", "B. Facial nerve weakness", "C. A dome-shaped bluish swelling beneath the tongue", "D. Acute painful swelling precipitated by eating", "E. Fluctuant extraoral swelling in the submandibular region"],
+            answer: 3
+        },
+        {
+            q: "12. All are complications of parotid gland surgery except:",
+            options: ["A. Saliva fistula", "B. Infection", "C. Injury to the hypoglossal nerve", "D. Frey's syndrome", "E. Injury to the Facial nerve"],
+            answer: 2
+        },
+        {
+            q: "13. In the submandibular gland excision, the main concern is that the skin incision carries a risk of damage to:",
+            options: ["A. Marginal mandibular branch of the facial nerve", "B. Hypoglossal nerves", "C. Lingual nerve", "D. Facial vein", "E. Facial artery"],
+            answer: 0
+        },
+        {
+            q: "14. The incidence of sialolithiasis is more related to Wharton's duct because:",
+            options: ["A. It has a long path", "B. It has a curved path", "C. Thick secretion", "D. High calcium content", "E. All of above"],
+            answer: 4
+        }
+    ]
+},
+{
+    id: "sec20",
+    title: "Management Of TMJ Disorders",
+    questions: [
+        {
+            q: "1. Which of the following is NOT a commonly accepted mechanism contributing to the pathogenesis of degenerative joint disease (DJD) in the TMJ?",
+            options: ["A. Direct mechanical trauma", "B. Hypoxia-reperfusion injury", "C. Neurogenic inflammation", "D. Bacterial invasion of the joint space", "E. Oxidative stress from excessive mechanical loading"],
+            answer: 3
+        },
+        {
+            q: "2. Which systemic disease is most commonly associated with bilateral TMJ involvement?",
+            options: ["A. Osteoarthritis", "B. Rheumatoid arthritis", "C. Chronic recurrent dislocation", "D. Internal derangement", "E. Myofascial pain disorder"],
+            answer: 1
+        },
+        {
+            q: "3. Which is the primary distinguishing feature between anterior disk displacement with reduction and without reduction?",
+            options: ["A. The presence of a clicking sound during mandibular movement", "B. Radiographic evidence of joint space narrowing", "C. A history of trauma preceding the onset of symptoms", "D. The involvement of systemic inflammatory diseases", "E. The presence of severe pain in all mandibular movements"],
+            answer: 0
+        },
+        {
+            q: "4. The commonest cause of TMJ ankylosis is:",
+            options: ["A. Development disturbance", "B. Infections", "C. Disuse atrophy", "D. Trauma", "E. Idiopathic"],
+            answer: 3
+        },
+        {
+            q: "5. Regarding the Wilkes classification of internal derangement of TMJ disorders, which statement is correct?",
+            options: ["A. Stage 1: early reducing disk displacement, no pain or limitation, early opening click", "B. Stage II: nonreducing disk displacement, acute subacute multiple painful episodes, locking and restricted mobility", "C. Stage III: late reducing disk displacement, one or more episodes of pain, late opening click and transient catch and lock", "D. Stage IV: nonreducing disk displacement, chronic osteoarthritis, crepitus, restricted motion and limited function", "E. Stage V: nonreducing disk displacement, chronic increasing functional disturbance"],
+            answer: 0
+        },
+        {
+            q: "6. Concerning the arthrocentesis procedure in management of TMJ disorders, which statement is correct?",
+            options: ["A. Considered as advanced surgical procedure", "B. The procedure done in inferior joint cavity of TMJ", "C. Corticosteroids are the only irrigation solution", "D. Holmlund-Hellsing line: a line from the lateral canthus to a point bisecting the tragus of the ear", "E. Both A and B are correct"],
+            answer: 4
+        },
+        {
+            q: "7. In the anatomy of the TMJ, which part is specifically noted for being both highly vascular and highly innervated?",
+            options: ["A. The intermediate zone of the disk", "B. The dense articular fibrocartilage", "C. The retrodiskal bilaminar zone", "D. The synovial membrane lining the capsule"],
+            answer: 2
+        },
+        {
+            q: "8. A patient is diagnosed with long-standing bilateral TMJ ankylosis. Which oral feature is most likely observed?",
+            options: ["A. Posterior crossbite", "B. Anterior open bite", "C. Deviation toward the affected side on opening", "D. Occlusal canting"],
+            answer: 1
+        },
+        {
+            q: "9. During active jaw exercises to increase maximal incisal opening, which muscles is the patient instructed to activate to relax the elevators?",
+            options: ["A. Medial pterygoid and Masseter", "B. Temporalis and Medial pterygoid", "C. Suprahyoid muscles (geniohyoid, mylohyoid, digastric)", "D. Lateral pterygoid and Temporalis"],
+            answer: 2
+        },
+        {
+            q: "10. In the Wilkes classification, a patient with 'Non-reducing disk displacement: chronic with osteoarthritis' would be categorized as:",
+            options: ["A. Stage II", "B. Stage III", "C. Stage IV", "D. Stage V"],
+            answer: 3
+        }
+    ]
+},
+
+{
+    id: "sec21",
+    title: "Cleft Lip and Palate",
+    questions: [
+        {
+            q: "1. Regarding the incidence of cleft lip and palate (CLP) which of the following is true?",
+            options: ["A. The incidence is highest in Asians (1:500)", "B. Bilateral clefts are 9 times more common than unilateral clefts", "C. CLP are more frequent on the right side than on the left side", "D. Females are predominant in CLP population", "E. Usually CLP are not associated with other syndromes"],
+            answer: 0
+        },
+        {
+            q: "2. Regarding the feeding of a child with cleft lip and palate (CLP) which of the following is true?",
+            options: ["A. In children born with isolated cleft lip, feeding is very critical concern", "B. Specialized nipples and bottles are necessary to improve feeding", "C. The child is not usually fed in the recumbent (lying down) position", "D. A and B", "E. B and C"],
+            answer: 4
+        },
+        {
+            q: "3. Closing the palatal cleft early in life has the following advantages, except one:",
+            options: ["A. Better palatal and pharyngeal muscle development", "B. Improve maxillary growth", "C. Better development of phonation skills", "D. Better auditory tube function", "E. Improve oral hygiene"],
+            answer: 1
+        },
+        {
+            q: "4. The Furlow technique of palatal repair is characterized by:",
+            options: ["A. V-Y pushback", "B. The use of bipedicled flaps", "C. Z-plasties of the oral and nasal mucosa", "D. Two-flap palatoplasty", "E. Simultaneous bone grafting"],
+            answer: 2
+        },
+        {
+            q: "5. Regarding Lip adhesion which of the following is FALSE?",
+            options: ["A. Is carried out to decrease the amount of prolapsed segments", "B. It is usually completed at 9 months of age", "C. Can be done prior to definitive lip repair", "D. Can achieve a better relationship of both the lip structures and the dental arches", "E. It is usually used in wide bilateral clefts"],
+            answer: 1
+        },
+        {
+            q: "6. In management of cleft lip and palate, the 'rule of 10' is usually used for:",
+            options: ["A. Timing the start of lip taping", "B. Timing the start of nasoalveolar molding", "C. Timing the surgical correction of cleft lip", "D. Timing the surgical correction of cleft palate", "E. Timing the surgical correction of alveolar cleft"],
+            answer: 2
+        },
+        {
+            q: "7. A surgeon is selecting a bone graft site for an alveolar cleft. They prioritize a site with the same embryonic origin as the maxilla but must avoid the mental nerve. Which site is being considered?",
+            options: ["A. Tibia", "B. Iliac Crest", "C. Cranium", "D. Mandibular Symphysis"],
+            answer: 3
+        },
+        {
+            q: "8. During the primary operative management of a cleft palate, which of the following is true regarding the surgical layers?",
+            options: ["A. The soft palate is closed in two layers: nasal mucosa and oral mucosa", "B. The hard palate is closed in three layers including the velar musculature", "C. Both hard and soft palate repairs must be tension-free to avoid fistula formation", "D. Soft palate muscles are reconstructed only after the oral mucosa is closed"],
+            answer: 2
+        },
+        {
+            q: "9. Which 'Preoperative Management' concern is considered NOT critical for infants born with isolated cleft lip?",
+            options: ["A. Nasoalveolar molding (NAM)", "B. Feeding concerns and negative pressure creation", "C. Meeting the 'Rule of 10s' for hemoglobin", "D. Presurgical orthopedics (PSO) for maxillary segments"],
+            answer: 1
+        },
+        {
+            q: "10. A 15-year-old girl with a history of CLP requires surgery to correct her midface growth deficiency. Which procedure is most appropriate at this age?",
+            options: ["A. Alveolar reconstruction", "B. Orthognathic surgery", "C. Pharyngeal flap based on speech development", "D. Definitive rhinoplasty"],
+            answer: 1
+        }
+    ]
+}
+];
+
+// Render quiz
+let totalQuestions = 0;
+let answeredQuestions = 0;
+let correctAnswers = 0;
+
+function renderQuiz() {
+    const container = document.getElementById('quiz-content');
+    let html = '';
+    let qIndex = 0;
+
+    quizData.forEach(section => {
+        html += `<div class="subject-section" id="${section.id}">`;
+        html += `<h2>${section.title}</h2>`;
+
+        section.questions.forEach((question, i) => {
+            totalQuestions++;
+            const qId = `q_${qIndex}`;
+            html += `<div class="question-block" id="${qId}_block">`;
+            html += `<p class="question-text">${question.q}</p>`;
+            html += `<ul class="options">`;
+
+            question.options.forEach((option, j) => {
+                html += `<li>
+                    <input type="radio" name="${qId}" id="${qId}_${j}" value="${j}" onchange="selectAnswer('${qId}', ${j}, ${question.answer})">
+                    <label for="${qId}_${j}" id="${qId}_label_${j}">${option}</label>
+                </li>`;
+            });
+
+            html += `</ul>`;
+            html += `<button class="btn-check" onclick="checkAnswer('${qId}', ${question.answer}, ${question.options.length})">Show Answer</button>`;
+            html += `<div class="result" id="${qId}_result"></div>`;
+            html += `</div>`;
+            qIndex++;
+        });
+
+        html += `</div>`;
+    });
+
+    container.innerHTML = html;
+    document.getElementById('totalQ').textContent = totalQuestions;
+}
+
+function selectAnswer(qId, selected, correct) {
+    // Reset all labels for this question
+    const labels = document.querySelectorAll(`label[id^="${qId}_label_"]`);
+    labels.forEach(label => {
+        label.classList.remove('correct', 'incorrect', 'show-correct');
+    });
+
+    const selectedLabel = document.getElementById(`${qId}_label_${selected}`);
+    if (selected === correct) {
+        selectedLabel.classList.add('correct');
+    } else {
+        selectedLabel.classList.add('incorrect');
+    }
+}
+
+function checkAnswer(qId, correct, numOptions) {
+    const resultDiv = document.getElementById(`${qId}_result`);
+    const selectedInput = document.querySelector(`input[name="${qId}"]:checked`);
+
+    // Reset all labels
+    for (let i = 0; i < numOptions; i++) {
+        const label = document.getElementById(`${qId}_label_${i}`);
+        if (label) {
+            label.classList.remove('correct', 'incorrect', 'show-correct');
+        }
+    }
+
+    // Show the correct answer
+    const correctLabel = document.getElementById(`${qId}_label_${correct}`);
+    correctLabel.classList.add('show-correct');
+
+    if (selectedInput) {
+        const selected = parseInt(selectedInput.value);
+        if (!resultDiv.dataset.answered) {
+            resultDiv.dataset.answered = 'true';
+            answeredQuestions++;
+            if (selected === correct) {
+                correctAnswers++;
+                resultDiv.className = 'result correct';
+                resultDiv.textContent = 'Correct! Well done!';
+            } else {
+                resultDiv.className = 'result incorrect';
+                const selectedLabel = document.getElementById(`${qId}_label_${selected}`);
+                selectedLabel.classList.add('incorrect');
+                resultDiv.textContent = `Incorrect. The correct answer is: ${correctLabel.textContent}`;
+            }
+            document.getElementById('answered').textContent = answeredQuestions;
+            document.getElementById('correctCount').textContent = correctAnswers;
+        } else {
+            // Already answered, just highlight
+            const selected2 = parseInt(selectedInput.value);
+            if (selected2 !== correct) {
+                const selectedLabel = document.getElementById(`${qId}_label_${selected2}`);
+                selectedLabel.classList.add('incorrect');
+            }
+        }
+    } else {
+        resultDiv.className = 'result incorrect';
+        resultDiv.textContent = `The correct answer is: ${correctLabel.textContent}`;
+        if (!resultDiv.dataset.answered) {
+            resultDiv.dataset.answered = 'true';
+            answeredQuestions++;
+            document.getElementById('answered').textContent = answeredQuestions;
+        }
+    }
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
